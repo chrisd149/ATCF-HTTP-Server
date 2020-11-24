@@ -86,7 +86,7 @@ def args():
 if __name__ == "__main__":
     Thread(target=Server).start()  # Read class description
     # Server will try to use ip and port defined in .env.  If not found, it will use default values
-    Thread(app.run(host=environ.get("FLASK_IP"), port=environ.get("FLASK_PORT"), debug=False)).start()  # Flask server
+    Thread(app.run(host=environ.get("FLASK_IP"), port=environ.get("FLASK_PORT"), debug=True, use_reloader=False)).start()  # Flask server
 
 
 
