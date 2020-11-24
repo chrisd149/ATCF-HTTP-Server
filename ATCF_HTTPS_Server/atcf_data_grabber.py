@@ -45,8 +45,7 @@ def get_atcf_data():
             e.close()
             csv_file_1.close()
             os.remove('temp.csv')  # removes temp file
-        remove_last_column()  # removes empty column
-        to_json()  # Copies CSV data to json
+        edit_csv()
         return 200  # Good status code
 
     except requests.exceptions.Timeout:
@@ -56,13 +55,9 @@ def get_atcf_data():
         return 404  # Site is down or link is bad...
 
 
-def remove_last_column():
+def edit_csv():
+    # Cleans up our CSV
     df = pd.read_csv('data.csv', index_col=False)
-    df.drop(df.columns[9], axis=1, inplace=True)
+    df.drop(df.columns[9], axis=1, inplace=True)  # column 9 is empty
+    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed (0 -> 0000)
     df.to_csv('data.csv', index=False)
-
-
-def to_json():
-    df = pd.read_csv('data.csv', index_col=False)
-    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
-    df.to_json('data.json', orient='records', indent=4)

@@ -10,8 +10,8 @@ p = inflect.engine()  # Initializes inflect engine
 
 # Returns all storms globally
 def get_storms():
-    df = pd.read_json('data.json')
-    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
+    df = pd.read_csv('data.csv')
+    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed
     if df.empty:
         return f'No storm data is available right now... check back later'
     else:
@@ -21,8 +21,8 @@ def get_storms():
 # Returns storm(s) by depression id
 def get_storm_id(input_id: str):
     input_id = input_id.upper()
-    df = pd.read_json('data.json')
-    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
+    df = pd.read_csv('data.csv')
+    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed
     new_df = df[(df['id'] == input_id)]  # row of storm data
     if new_df.empty:
         return f'{input_id} does not match any active storms'
@@ -43,8 +43,8 @@ def get_storm_name(input_name: str or int):
     except ValueError:  # Input name is already a string/not an int
         input_name = input_name.upper()
 
-    df = pd.read_json('data.json')
-    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
+    df = pd.read_csv('data.csv')
+    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed
     new_df = df[(df['name'] == input_name)]  # row of storm data
     if new_df.empty:
         return f'{input_name} does not match any active storms'
@@ -55,8 +55,8 @@ def get_storm_name(input_name: str or int):
 # Returns all storms in a basin
 def get_storms_in_basin(basin: str):
     basin = basin.upper()
-    df = pd.read_json('data.json')
-    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
+    df = pd.read_csv('data.csv')
+    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed
     new_df = df[(df['basin'] == basin)]  # rows of storms data
     if new_df.empty:
         return f'{basin} does not match any active basins'
