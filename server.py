@@ -1,15 +1,23 @@
+"""
+Title: ATCF HTTP Server
+Description: A Flask-based HTTP server that returns data from the ATCF in JSON format.
+Mode: Development DON'T DEPLOY TO PROD >:(
+"""
+
 # Python modules
 from datetime import datetime
 from threading import Thread
-import time
+from time import sleep
+from os import environ
 
 # 3rd party modules
 from flask import Flask, Response, request
+from dotenv import load_dotenv
 
 # Local modules
 from ATCF_HTTPS_Server import atcf_data_grabber, get_data
 
-
+load_dotenv()  # Initializes dotenv
 date_now = datetime.now()
 
 
@@ -31,20 +39,20 @@ class Server:
                 if tries >= 5:  # We returned code 403 five or more times in a row
                     print('Site is down, we will ping later...')
                     tries = 0
-                    time.sleep(890)
+                    sleep(900)
                     continue
                 print('Timeout connection... retrying...')
                 tries += 1
                 continue
             if code == 404:
                 print('Site is down, we will ping later...')
-                time.sleep(890)
+                sleep(900)
                 # TODO: Ping the devs
                 continue
             if code == 200:
                 tries = 0  # resets tries
                 print(f'Successfully downloaded ATCF data at {date_now}')
-                time.sleep(890)
+                sleep(900)
 
 
 app = Flask(__name__)
@@ -77,7 +85,9 @@ def args():
 
 if __name__ == "__main__":
     Thread(target=Server).start()  # Read class description
-    Thread(app.run(host="127.0.0.1", debug=False)).start()  # Flask server
+    # Server will try to use ip and port defined in .env.  If not found, it will use default values
+    Thread(app.run(host=environ.get("FLASK_IP"), port=environ.get("FLASK_PORT"), debug=False)).start()  # Flask server
+
 
 
 
