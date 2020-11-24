@@ -1,25 +1,30 @@
+"""
+Description: Downloads and formats data from the ATCF sector file into a CSV file.
+"""
+
 # Python modules
 import csv
-import os
+from os import remove, environ
+
 # 3rd party modules
 import requests
 import pandas as pd
 
+
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure']
-http_headers = {"User-Agent":
-                    "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36"}
 
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
 
 # TODO: Logging
+# Headers don't work, and will give out an error if used with the atcf site.
 def get_atcf_data():
     # Pings atcf_link and writes information to temp.csv.  We then translate temp.csv to data.csv
     # into the proper CSV format.
     print('Pinging ATCF site...')
     try:
         # Pings ATCF link and waits 10 seconds to connect, and 15 seconds to read the data.
-        response = requests.get(atcf_link, headers=http_headers, timeout=(10, 15))
+        response = requests.get(atcf_link, timeout=(10, 15))
         response.encoding = 'utf-8'
 
         # Opens temp.csv to write raw data to
@@ -44,7 +49,7 @@ def get_atcf_data():
                 csv_file_1.write(','.join(','.join(item.split()) for item in row) + '\n')
             e.close()
             csv_file_1.close()
-            os.remove('temp.csv')  # removes temp file
+            remove('temp.csv')  # removes temp file
         edit_csv()
         return 200  # Good status code
 

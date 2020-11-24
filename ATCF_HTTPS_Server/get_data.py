@@ -1,3 +1,7 @@
+"""
+Description: Returns specified storm(s) data based on client criteria.
+"""
+
 import pandas as pd
 import inflect
 
