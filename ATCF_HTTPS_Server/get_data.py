@@ -4,6 +4,10 @@ import inflect
 p = inflect.engine()  # Initializes inflect engine
 
 
+# For all functions, we check if the requested Dataframe (df) is empty.  If so, either
+# the client entered the wrong information, or no active storms fit the requested
+# criteria.
+
 # Returns all storms globally
 def get_storms():
     df = pd.read_json('data.json')
@@ -15,7 +19,7 @@ def get_storms():
 
 
 # Returns storm(s) by depression id
-def get_storm_id(input_id):
+def get_storm_id(input_id: str):
     input_id = input_id.upper()
     df = pd.read_json('data.json')
     df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
@@ -27,7 +31,7 @@ def get_storm_id(input_id):
 
 
 # Returns storm(s) by name
-def get_storm_name(input_name):
+def get_storm_name(input_name: str or int):
     # Only accepts strings, however we can convert numbers to word form if possible, as depressions
     # are named with a number (i.e FOUR).
 
@@ -49,7 +53,7 @@ def get_storm_name(input_name):
 
 
 # Returns all storms in a basin
-def get_storms_in_basin(basin):
+def get_storms_in_basin(basin: str):
     basin = basin.upper()
     df = pd.read_json('data.json')
     df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to date if needed
