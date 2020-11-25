@@ -13,12 +13,14 @@ from os import environ
 # 3rd party modules
 from flask import Flask, Response, request
 from dotenv import load_dotenv
+import pytz
 
 # Local modules
 from ATCF_HTTPS_Server import atcf_data_grabber, get_data
 
 load_dotenv()  # Initializes dotenv
-date_now = datetime.now()
+date_now_raw = datetime.now(pytz.utc)
+date_now = date_now_raw.strftime('%H:%M:%S')
 
 
 # TODO: Add logging

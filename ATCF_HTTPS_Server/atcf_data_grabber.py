@@ -4,14 +4,17 @@ Description: Downloads and formats data from the ATCF sector file into a CSV fil
 
 # Python modules
 import csv
-from os import remove, environ
+from os import remove
+from datetime import datetime
 
 # 3rd party modules
 import requests
 import pandas as pd
+import pytz
 
-
-csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure']
+date_now_raw = datetime.now(pytz.utc)
+date_now = date_now_raw.strftime('%H:%M:%S')
+csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
 
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
@@ -46,7 +49,8 @@ def get_atcf_data():
 
             # Writes comma delimited data to data.csv
             for row in csv_reader:
-                csv_file_1.write(','.join(','.join(item.split()) for item in row) + '\n')
+                csv_file_1.write(','.join(','.join(item.split()) for item in row))
+                csv_file_1.write(',' + str(date_now) + '\n')
             e.close()
             csv_file_1.close()
             remove('temp.csv')  # removes temp file
@@ -63,6 +67,6 @@ def get_atcf_data():
 def edit_csv():
     # Cleans up our CSV
     df = pd.read_csv('data.csv', index_col=False)
-    df.drop(df.columns[9], axis=1, inplace=True)  # column 9 is empty
+    df.drop(df.columns[10], axis=1, inplace=True)  # drops empty column
     df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed (0 -> 0000)
     df.to_csv('data.csv', index=False)
