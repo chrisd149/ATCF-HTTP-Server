@@ -6,6 +6,7 @@ Description: Downloads and formats data from the ATCF sector file into a CSV fil
 import csv
 from os import remove
 from datetime import datetime
+import urllib3
 
 # 3rd party modules
 import requests
@@ -60,7 +61,7 @@ def get_atcf_data():
     except requests.exceptions.Timeout:
         return 403  # Retry connection?
 
-    except requests.HTTPError:
+    except requests.HTTPError or urllib3.exceptions:
         return 404  # Site is down or link is bad...
 
 
@@ -70,3 +71,4 @@ def edit_csv():
     df.drop(df.columns[10], axis=1, inplace=True)  # drops empty column
     df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed (0 -> 0000)
     df.to_csv('data.csv', index=False)
+
