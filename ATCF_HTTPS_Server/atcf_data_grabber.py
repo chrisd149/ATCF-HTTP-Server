@@ -14,7 +14,7 @@ import requests
 import pandas as pd
 import pytz
 
-from ATCF_HTTPS_Server import data_processing
+from ATCF_HTTPS_Server.data_processing import JsonMgr
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
 
@@ -55,14 +55,12 @@ def get_atcf_data():
             e.close()
             csv_file_1.close()
             remove('temp.csv')  # removes temp file
-        data_processing.edit_csv()
+        JsonMgr()
         return 200  # Good status code
 
     except requests.exceptions.Timeout:
-        data_processing.edit_csv()
         return 403  # Retry connection?
 
     except requests.HTTPError or urllib3.exceptions:
-        data_processing.edit_csv()
         return 404  # Site is down or link is bad...
 

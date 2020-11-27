@@ -11,7 +11,7 @@ from time import sleep
 from os import environ
 
 # 3rd party modules
-from flask import Flask, Response, request, jsonify
+from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import pytz
 
@@ -24,7 +24,7 @@ date_now = date_now_raw.strftime('%H:%M:%S')
 
 
 # TODO: Add logging
-class Server:
+class ATCFServer:
     # Downloads data from the ATCF site on a set interval.
     # Based on the code returned by get_atcf_data(), we can
     # try to continue the program or reconnect with the ATCF
@@ -61,14 +61,14 @@ app = Flask(__name__)
 
 
 # Default GET response, returns all formatted data
-@app.route('/', methods=['GET'])
+@app.route('/api/', methods=['GET'])
 def get_all():
     return jsonify(get_data.get_storms())
 
 
 # Returns specific storms based on depression id (i.e. 23L), name (i.e. POLO) or basin (i.e IO).
 # Must add "/args/?" + "name=NAME" or "id=ID" to end of server ip.
-@app.route('/args/', methods=['GET'])
+@app.route('/api/args/', methods=['GET'])
 def args():
     # Possible args (id or name)
     id = request.args.get('id')  # depression id
@@ -86,7 +86,7 @@ def args():
 
 
 if __name__ == "__main__":
-    Thread(target=Server).start()  # Read class description
+    Thread(target=ATCFServer).start()  # Read class description
     # Server will try to use ip and port defined in .env.  If not found, it will use default values
     Thread(app.run(host=environ.get("FLASK_IP"), port=environ.get("FLASK_PORT"), debug=True, use_reloader=False)).start()  # Flask server
 
