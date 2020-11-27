@@ -7,7 +7,7 @@ import inflect
 
 p = inflect.engine()  # Initializes inflect engine
 
-
+csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
 # For all functions, we check if the requested Dataframe (df) is empty.  If so, either
 # the client entered the wrong information, or no active storms fit the requested
 # criteria.
@@ -66,4 +66,8 @@ def get_storms_in_basin(basin: str):
         return f'{basin} does not match any active basins'
     else:
         return new_df.to_json(orient='records')
+
+
+
+
 

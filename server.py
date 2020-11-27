@@ -11,7 +11,7 @@ from time import sleep
 from os import environ
 
 # 3rd party modules
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify
 from dotenv import load_dotenv
 import pytz
 
@@ -63,7 +63,7 @@ app = Flask(__name__)
 # Default GET response, returns all formatted data
 @app.route('/', methods=['GET'])
 def get_all():
-    return Response(get_data.get_storms(), mimetype='application/json')
+    return Response(get_data.get_storms(), mimetype='application/vnd.api+json')
 
 
 # Returns specific storms based on depression id (i.e. 23L), name (i.e. POLO) or basin (i.e IO).
@@ -78,11 +78,11 @@ def args():
     if not id or not name:
         pass  # if no id or name or basin is passed we skip it
     if id:
-        return Response(get_data.get_storm_id(id), mimetype='application/json')
+        return Response(get_data.get_storm_id(id), mimetype='application/vnd.api+json')
     if name:
-        return Response(get_data.get_storm_name(name), mimetype='application/json')
+        return Response(get_data.get_storm_name(name), mimetype='application/vnd.api+json')
     if basin:
-        return Response(get_data.get_storms_in_basin(basin), mimetype='application/json')
+        return Response(get_data.get_storms_in_basin(basin), mimetype='application/vnd.api+json')
 
 
 if __name__ == "__main__":
