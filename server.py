@@ -78,11 +78,11 @@ def args():
     if not id or not name:
         pass  # if no id or name or basin is passed we skip it
     if id:
-        return Response(get_data.get_storm_id(id), mimetype='application/vnd.api+json')
+        return jsonify(get_data.get_storm_id(id))
     if name:
-        return Response(get_data.get_storm_name(name), mimetype='application/vnd.api+json')
+        return jsonify(get_data.get_storm_name(name))
     if basin:
-        return Response(get_data.get_storms_in_basin(basin), mimetype='application/vnd.api+json')
+        return jsonify(get_data.get_storms_in_basin(basin))
 
 
 if __name__ == "__main__":
