@@ -63,7 +63,7 @@ app = Flask(__name__)
 # Default GET response, returns all formatted data
 @app.route('/', methods=['GET'])
 def get_all():
-    return Response(get_data.get_storms(), mimetype='application/vnd.api+json')
+    return jsonify(get_data.get_storms())
 
 
 # Returns specific storms based on depression id (i.e. 23L), name (i.e. POLO) or basin (i.e IO).
