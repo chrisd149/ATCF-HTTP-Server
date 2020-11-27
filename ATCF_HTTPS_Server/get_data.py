@@ -1,8 +1,10 @@
 """
 Description: Returns specified storm(s) data based on client criteria.
 """
+# Python modules
 import json
 
+# 3rd party modules
 import inflect
 
 p = inflect.engine()  # Initializes inflect engine
@@ -17,7 +19,7 @@ csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', '
 # Returns all storms globally
 def get_storms():
     with open('data.json') as f:
-        data = json.load(f)['storms']
+        data = json.load(f)
     return fix_all_time(data)
 
 
@@ -25,12 +27,13 @@ def get_storms():
 def get_storm_id(input_id: str):
     input_id = input_id.upper()
     with open('data.json') as f:
-        data = json.load(f)['storms']
-    for storm in data:
-        storm_id = next(iter(storm))
+        data = json.load(f)
+    # For every storm stored, we check if it's id matches the user id.
+    for storm in data['storms']:
+        storm_id = next(iter(storm))  # Stores dictionary key as our storm id
         if storm_id == input_id:
-            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)
-            return storm
+            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)  # Fixes leading zeros
+            return storm  # Returns specified storm
 
 
 # Returns storm(s) by name
@@ -47,30 +50,32 @@ def get_storm_name(input_name: str or int):
         input_name = input_name.upper()
 
     with open('data.json') as f:
-        data = json.load(f)['storms']
-    for storm in data:
-        storm_id = next(iter(storm))
+        data = json.load(f)
+    # For every storm stored, we check if it's name matches the user name.
+    for storm in data['storms']:
+        storm_id = next(iter(storm))  # Stores dictionary key for indexing
         if storm[storm_id]['name'] == input_name:
-            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)
+            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)  # Fixes leading zeros
             return storm
 
 
 # Returns all storms in a basin
 def get_storms_in_basin(basin: str):
-    storms = list()
     input_basin = basin.upper()
     with open('data.json') as f:
-        data = json.load(f)['storms']
-    for storm in data:
-        storm_id = next(iter(storm))
-        if storm[storm_id]['basin'] == input_basin:
-            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)
-            storms.append(storm)
-    return fix_all_time(storms)
+        data = json.load(f)
+    # We check all storms to see which one(s) are in the user basin, and returns, if any, storm data.
+    for storm in data['storms']:
+        storm_id = next(iter(storm))  # Stores dictionary key for indexing
+        if storm[storm_id]['basin'] != input_basin:
+            data['storms'].remove(storm)  # Removes storms not in basin
+    return fix_all_time(data)
 
 
-def fix_all_time(file):
-    for storm in file:
+# Fixes all time values in a list or dictionary object
+def fix_all_time(file: dict or list):
+    for storm in file['storms']:
+        # Makes every time value 4 digits (i.e. 0 -> 0000, 600 -> 0600)
         storm[next(iter(storm))]['time'] = storm[next(iter(storm))]['time'].zfill(4)
     return file
 

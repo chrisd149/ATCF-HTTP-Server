@@ -5,15 +5,12 @@ Description: Downloads and formats data from the ATCF sector file into a CSV fil
 # Python modules
 import csv
 from os import remove
-from datetime import datetime
 import urllib3
-import json
 
 # 3rd party modules
 import requests
-import pandas as pd
-import pytz
 
+# Local modules
 from ATCF_HTTPS_Server.data_processing import JsonMgr
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
@@ -55,7 +52,7 @@ def get_atcf_data():
             e.close()
             csv_file_1.close()
             remove('temp.csv')  # removes temp file
-        JsonMgr()
+        JsonMgr()  # Creates data.json
         return 200  # Good status code
 
     except requests.exceptions.Timeout:
