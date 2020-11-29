@@ -64,7 +64,8 @@ def get_storm_name(input_name: str or int):
 # Returns all storms in a basin
 def get_storms_in_basin(basin):
     input_basin = basin.upper()
-    return json.loads(JsonMgr.csv_to_json(input_basin))
+    data = json.loads(JsonMgr.csv_to_json(input_basin))
+    return fix_all_time(data)
 
 
 # Fixes all time values in a list or dictionary object
