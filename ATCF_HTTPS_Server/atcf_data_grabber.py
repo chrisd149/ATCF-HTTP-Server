@@ -52,7 +52,7 @@ def get_atcf_data():
             e.close()
             csv_file_1.close()
             remove('temp.csv')  # removes temp file
-        JsonMgr()  # Creates data.json
+        JsonMgr.csv_to_json()  # Creates data.json
         return 200  # Good status code
 
     except requests.exceptions.Timeout:

@@ -7,6 +7,8 @@ import json
 # 3rd party modules
 import inflect
 
+from ATCF_HTTPS_Server.data_processing import JsonMgr
+
 p = inflect.engine()  # Initializes inflect engine
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
@@ -60,16 +62,9 @@ def get_storm_name(input_name: str or int):
 
 
 # Returns all storms in a basin
-def get_storms_in_basin(basin: str):
+def get_storms_in_basin(basin):
     input_basin = basin.upper()
-    with open('data.json') as f:
-        data = json.load(f)
-    # We check all storms to see which one(s) are in the user basin, and returns, if any, storm data.
-    for storm in data['storms']:
-        storm_id = next(iter(storm))  # Stores dictionary key for indexing
-        if storm[storm_id]['basin'] != input_basin:
-            data['storms'].remove(storm)  # Removes storms not in basin
-    return fix_all_time(data)
+    return json.loads(JsonMgr.csv_to_json(input_basin))
 
 
 # Fixes all time values in a list or dictionary object
