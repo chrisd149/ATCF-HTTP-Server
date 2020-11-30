@@ -63,7 +63,7 @@ class ATCFServer:
         func = self.next_interval()
         interval, now = func[0], func[1]
         seconds_to_sleep = interval - now
-        sleep(seconds_to_sleep.total_seconds() - 10)
+        sleep(abs(seconds_to_sleep.total_seconds()) - 10)
 
 
 app = Flask(__name__)
