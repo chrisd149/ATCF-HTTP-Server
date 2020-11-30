@@ -1,10 +1,10 @@
 call .\venv\Scripts\activate
 
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 
 :top
 
-python -m server
+python -m ATCF-HTTP-Server
 
 pause
 goto top
