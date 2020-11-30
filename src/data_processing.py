@@ -1,7 +1,3 @@
-"""
-Creates our data.json file based on the data in data.csv.
-"""
-
 # Python modules
 import json
 from datetime import datetime
@@ -23,7 +19,7 @@ class JsonMgr:
         pass
 
     @staticmethod
-    def csv_to_json(*input_basin):
+    def csv_to_json(*input_arg):
         date_now_raw = datetime.now(pytz.utc)
         date_now = date_now_raw.strftime('%H:%M:%S')
 
@@ -33,23 +29,38 @@ class JsonMgr:
         raw_json = dict()  # Empty dictionary for our JSON file
 
         # Adds last-updated and storms fields
-        raw_json["last-updated"] = str(date_now)  # HH:MM:SS
+        if not input_arg:
+            raw_json["last-updated"] = str(date_now)  # HH:MM:SS // Current time
+        else:
+            # If we are calling from the JSON after it was written (after last-updated is updated.)
+            # We open data.json and retrieve the last-updated field there instead of outputting the
+            # current time.
+            file = open(f'{DATA_DIR}/data.json', 'r')
+            values = json.load(file)
+            raw_json['last-updated'] = values['last-updated']  # HH:MM:SS // Current time
         raw_json["storms"] = []
 
         # Writes each storm data in storms list until no more rows are left to parse from the CSV.
         while rows != 0:
+            # cell_data and param are None by default. If no args are passed, they stay as None objects.
+            cell_data, param = None, None
+
             rows -= 1
             row_df = df.iloc[rows, :]  # Temp df for each row
-            # If input_basin arg isn't passed, we make it equal whatever is the basin found in the row.
-            # basin will equal input_basin if passed, however will equal the basin found in the row
-            # if no input_basin arg is passed. (No arg passed = we want every storm regardless of basin.)
-            if not input_basin:
-                basin = (row_df["basin"],)
+
+            # If input_arg is passed, we reassign param and cell data to values in the arg (tuple),
+            # and assign cell_data to the object in the Dataframe row and column of the type of
+            # arg (basin, name, or id).
+            if input_arg:
+                param = input_arg[0]
+                param_type = input_arg[1]
+                if param_type == 'basin' or 'name' or 'id':
+                    cell_data = (row_df[param_type])
             else:
-                basin = input_basin
-            # Only parses and saves rows that have the basin that equals the basin arg.  If no
-            # arg is supplied, we use the basin found in the row as the arg.
-            if row_df["basin"] == basin[0]:
+                pass
+            # Only parses and saves rows that have the cell data and params arg.  If no
+            # arg is supplied, we just compare None and None (returns all data).
+            if cell_data == param:
                 # JSON data
                 storm_data = \
                     {
@@ -67,7 +78,7 @@ class JsonMgr:
                 raw_json["storms"].append(storm_data)  # Appends storm_data dict to storms list
         # Converts raw_json dictionary to JSON
         json_data = json.dumps(raw_json, indent=4, sort_keys=True)
-        if not input_basin:
+        if not input_arg:
             create_json(json_data)  # Create data.json (called by ATCFServer thread)
         else:
             return json_data  # Returns json_data (served to user)
