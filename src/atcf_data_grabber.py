@@ -4,19 +4,19 @@ Description: Downloads and formats data from the ATCF sector file into a CSV fil
 
 # Python modules
 import csv
-from os import remove
-from datetime import datetime
+from os import remove, mkdir, path
 import urllib3
 
 # 3rd party modules
 import requests
-import pandas as pd
-import pytz
 
-date_now_raw = datetime.now(pytz.utc)
-date_now = date_now_raw.strftime('%H:%M:%S')
+# Local modules
+from src.data_processing import JsonMgr
+from config import Config
+
+DATA_DIR = Config.DATA_DIR
+
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
-
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
 
@@ -36,8 +36,11 @@ def get_atcf_data():
             b.write(response.text)
             b.close()
 
+        if not path.exists('data'):
+            mkdir('data')
+
         # Creates data.csv where formatted data will be written to.
-        csv_file_1 = open(f'data.csv', 'w+')
+        csv_file_1 = open(f'{DATA_DIR}/data.csv', 'w+')
 
         # Re-open temp.csv to read the raw data, then format it and write it to data.csv.
         with open(f'temp.csv', 'r') as e:
@@ -50,12 +53,11 @@ def get_atcf_data():
 
             # Writes comma delimited data to data.csv
             for row in csv_reader:
-                csv_file_1.write(','.join(','.join(item.split()) for item in row))
-                csv_file_1.write(',' + str(date_now) + '\n')
+                csv_file_1.write(','.join(','.join(item.split()) for item in row) + '\n')
             e.close()
             csv_file_1.close()
             remove('temp.csv')  # removes temp file
-        edit_csv()
+        JsonMgr.csv_to_json()  # Creates data.json
         return 200  # Good status code
 
     except requests.exceptions.Timeout:
@@ -63,12 +65,4 @@ def get_atcf_data():
 
     except requests.HTTPError or urllib3.exceptions:
         return 404  # Site is down or link is bad...
-
-
-def edit_csv():
-    # Cleans up our CSV
-    df = pd.read_csv('data.csv', index_col=False)
-    df.drop(df.columns[10], axis=1, inplace=True)  # drops empty column
-    df['time'] = df['time'].astype(str).str.zfill(4)  # adds leading zeros to time if needed (0 -> 0000)
-    df.to_csv('data.csv', index=False)
 
