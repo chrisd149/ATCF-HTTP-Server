@@ -10,9 +10,6 @@ from datetime import datetime
 import pandas as pd
 import pytz
 
-date_now_raw = datetime.now(pytz.utc)
-date_now = date_now_raw.strftime('%H:%M:%S')
-
 
 class JsonMgr:
     """
@@ -23,6 +20,9 @@ class JsonMgr:
 
     @staticmethod
     def csv_to_json(*input_basin):
+        date_now_raw = datetime.now(pytz.utc)
+        date_now = date_now_raw.strftime('%H:%M:%S')
+
         # Reads CSV as a pandas Dataframe, which we use to get all row/column information
         df = pd.read_csv('data.csv')  # Reads CSV
         rows = len(df.index)  # Number of rows in CSV
