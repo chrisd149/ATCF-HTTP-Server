@@ -11,7 +11,7 @@ import urllib3
 import requests
 
 # Local modules
-from ATCF_HTTPS_Server.data_processing import JsonMgr
+from src.data_processing import JsonMgr
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
 

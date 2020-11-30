@@ -7,7 +7,7 @@ import json
 # 3rd party modules
 import inflect
 
-from ATCF_HTTPS_Server.data_processing import JsonMgr
+from src.data_processing import JsonMgr
 
 p = inflect.engine()  # Initializes inflect engine
 
