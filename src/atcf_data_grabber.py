@@ -20,7 +20,6 @@ csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', '
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
 
-# TODO: Logging
 # Headers don't work, and will give out an error if used with the atcf site.
 def get_atcf_data():
     # Pings atcf_link and writes information to temp.csv.  We then translate temp.csv to data.csv

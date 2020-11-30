@@ -32,12 +32,13 @@ def get_storm_id(input_id: str):
     input_id = input_id.upper()
     with open(f'{DATA_DIR}/data.json') as f:
         data = json.load(f)
+    last_updated = data['last-updated']
     # For every storm stored, we check if it's id matches the user id.
     for storm in data['storms']:
         storm_id = next(iter(storm))  # Stores dictionary key as our storm id
         if storm_id == input_id:
             storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)  # Fixes leading zeros
-            return storm  # Returns specified storm
+            return f'last-updated: {last_updated}', storm  # Returns specified storm
 
 
 # Returns storm(s) by name
@@ -55,12 +56,13 @@ def get_storm_name(input_name: str or int):
 
     with open(f'{DATA_DIR}/data.json') as f:
         data = json.load(f)
+    last_updated = data['last-updated']
     # For every storm stored, we check if it's name matches the user name.
     for storm in data['storms']:
         storm_id = next(iter(storm))  # Stores dictionary key for indexing
         if storm[storm_id]['name'] == input_name:
             storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)  # Fixes leading zeros
-            return storm
+            return f'last-updated: {last_updated}', storm
 
 
 # Returns all storms in a basin
