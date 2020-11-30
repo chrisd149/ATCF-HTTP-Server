@@ -30,15 +30,8 @@ def get_storms():
 # Returns storm(s) by depression id
 def get_storm_id(input_id: str):
     input_id = input_id.upper()
-    with open(f'{DATA_DIR}/data.json') as f:
-        data = json.load(f)
-    last_updated = data['last-updated']
-    # For every storm stored, we check if it's id matches the user id.
-    for storm in data['storms']:
-        storm_id = next(iter(storm))  # Stores dictionary key as our storm id
-        if storm_id == input_id:
-            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)  # Fixes leading zeros
-            return f'last-updated: {last_updated}', storm  # Returns specified storm
+    data = json.loads(JsonMgr.csv_to_json(input_id, 'id'))
+    return fix_all_time(data)
 
 
 # Returns storm(s) by name
@@ -54,21 +47,14 @@ def get_storm_name(input_name: str or int):
     except ValueError:  # Input name is already a string/not an int
         input_name = input_name.upper()
 
-    with open(f'{DATA_DIR}/data.json') as f:
-        data = json.load(f)
-    last_updated = data['last-updated']
-    # For every storm stored, we check if it's name matches the user name.
-    for storm in data['storms']:
-        storm_id = next(iter(storm))  # Stores dictionary key for indexing
-        if storm[storm_id]['name'] == input_name:
-            storm[storm_id]['time'] = storm[storm_id]['time'].zfill(4)  # Fixes leading zeros
-            return f'last-updated: {last_updated}', storm
+    data = json.loads(JsonMgr.csv_to_json(input_name, 'name'))
+    return fix_all_time(data)
 
 
 # Returns all storms in a basin
 def get_storms_in_basin(basin):
     input_basin = basin.upper()
-    data = json.loads(JsonMgr.csv_to_json(input_basin))
+    data = json.loads(JsonMgr.csv_to_json(input_basin, 'basin'))
     return fix_all_time(data)
 
 

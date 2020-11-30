@@ -57,7 +57,12 @@ class ATCFServer:
         func = self.next_interval()
         interval, now = func[0], func[1]
         seconds_to_sleep = interval - now
-        sleep(abs(seconds_to_sleep.total_seconds()) - 10)
+        if seconds_to_sleep.total_seconds() <= 15:
+            # Prevents sleeping a negative amount (bad) since we subtract a few seconds when
+            # doing an extended sleep.
+            sleep(5)
+        else:
+            sleep(seconds_to_sleep.total_seconds() - 10)
 
 
 app = Flask(__name__)
