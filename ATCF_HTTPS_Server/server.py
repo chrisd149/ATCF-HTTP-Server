@@ -8,17 +8,15 @@ Mode: Development DON'T DEPLOY TO PROD >:(
 from datetime import datetime, timedelta
 from threading import Thread
 from time import sleep
-from os import environ
 
 # 3rd party modules
 from flask import Flask, request, jsonify
-from dotenv import load_dotenv
+
 import pytz
 
 # Local modules
 from ATCF_HTTPS_Server import atcf_data_grabber, get_data
-
-load_dotenv()  # Initializes dotenv
+from config import DevelopmentConfig
 
 
 class ATCFServer:
@@ -67,6 +65,7 @@ class ATCFServer:
 
 
 app = Flask(__name__)
+config = DevelopmentConfig
 
 
 # Default GET response, returns all formatted data
@@ -97,7 +96,10 @@ def args():
 if __name__ == "__main__":
     Thread(target=ATCFServer).start()  # Read class description
     # Server will try to use ip and port defined in .env.  If not found, it will use default values
-    Thread(app.run(host=environ.get("FLASK_IP"), port=environ.get("FLASK_PORT"), debug=True, use_reloader=False)).start()  # Flask server
+    Thread(app.run(host=config.FLASK_IP,
+                   port=config.FLASK_PORT,
+                   debug=config.DEBUG,
+                   use_reloader=config.RELOADER)).start()  # Flask server
 
 
 
