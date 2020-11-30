@@ -8,7 +8,9 @@ import json
 import inflect
 
 from src.data_processing import JsonMgr
+from config import Config
 
+DATA_DIR = Config.DATA_DIR
 p = inflect.engine()  # Initializes inflect engine
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
@@ -20,7 +22,7 @@ csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', '
 
 # Returns all storms globally
 def get_storms():
-    with open('data.json') as f:
+    with open(f'{DATA_DIR}/data.json') as f:
         data = json.load(f)
     return fix_all_time(data)
 
@@ -28,7 +30,7 @@ def get_storms():
 # Returns storm(s) by depression id
 def get_storm_id(input_id: str):
     input_id = input_id.upper()
-    with open('data.json') as f:
+    with open(f'{DATA_DIR}/data.json') as f:
         data = json.load(f)
     # For every storm stored, we check if it's id matches the user id.
     for storm in data['storms']:
@@ -51,7 +53,7 @@ def get_storm_name(input_name: str or int):
     except ValueError:  # Input name is already a string/not an int
         input_name = input_name.upper()
 
-    with open('data.json') as f:
+    with open(f'{DATA_DIR}/data.json') as f:
         data = json.load(f)
     # For every storm stored, we check if it's name matches the user name.
     for storm in data['storms']:

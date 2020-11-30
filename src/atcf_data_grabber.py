@@ -4,7 +4,7 @@ Description: Downloads and formats data from the ATCF sector file into a CSV fil
 
 # Python modules
 import csv
-from os import remove
+from os import remove, mkdir, path
 import urllib3
 
 # 3rd party modules
@@ -12,9 +12,11 @@ import requests
 
 # Local modules
 from src.data_processing import JsonMgr
+from config import Config
+
+DATA_DIR = Config.DATA_DIR
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
-
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
 
@@ -34,8 +36,11 @@ def get_atcf_data():
             b.write(response.text)
             b.close()
 
+        if not path.exists('data'):
+            mkdir('data')
+
         # Creates data.csv where formatted data will be written to.
-        csv_file_1 = open(f'data.csv', 'w+')
+        csv_file_1 = open(f'{DATA_DIR}/data.csv', 'w+')
 
         # Re-open temp.csv to read the raw data, then format it and write it to data.csv.
         with open(f'temp.csv', 'r') as e:
