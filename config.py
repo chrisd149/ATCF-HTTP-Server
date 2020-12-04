@@ -14,6 +14,7 @@ class Config(object):
 
 
 class ProductionConfig(Config):
+    # Don't actually use this for real production with Flask alone
     DEBUG = False
     FLASK_IP = environ.get('PROD_FLASK_IP')
     FLASK_PORT = environ.get('PROD_FLASK_PORT')
