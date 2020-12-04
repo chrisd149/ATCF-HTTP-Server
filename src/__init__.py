@@ -74,7 +74,13 @@ def index():
     return render_template("index.html")
 
 
-# Default GET response, returns all formatted data
+# Returns HTML table of data/data.csv
+@app.route('/data/', methods=['GET'])
+def csv_data():
+    return render_template("data.html")
+
+
+# Returns all data in JSON format
 @app.route('/api/', methods=['GET'])
 def get_all():
     return jsonify(get_data.get_storms())
@@ -87,7 +93,7 @@ def args():
     # Possible args (id or name)
     id = request.args.get('id')  # depression id
     name = request.args.get('name')  # storm name
-    basin = request.args.get('basin')
+    basin = request.args.get('basin') # basin
 
     if not id or not name:
         pass  # if no id or name or basin is passed we skip it

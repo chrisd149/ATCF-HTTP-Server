@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ATCF HTTP Server</title>
-    <style>
-    table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 10px;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to <a href="https://github.com/chrisd149/ATCF-HTTP-Server">ATCF HTTP Server</a> homepage!</h1>
-    <h2>How to use</h2>
-    <p>You should read the <a href="https://github.com/chrisd149/ATCF-HTTP-Server/blob/main/README.md">README.md</a> before starting out</p>
-    <h2>Params [GET]</h2>
-<p><small>All params can be can be lowercase or uppercase.</small></p>
-    <li>/api/</li>
-    <p>Returns all storms' data in JSON format.</p>
-    <ul style="padding-left:80px">
-        <li>id</li>
-        <p>Returns storm by depression id (i.e. 12L.)</p>
-        <li>name</li>
-        <p>Returns storm by name (i.e. Iota.)</p>
-        <li>basin</li>
-        <p>Returns all storms in a basin (i.e. ATL.)</p>
-    </ul>
-<p><small>Make sure to add <i>args?</i> to the end of <i>/api/</i> for id, name, or basin.</small></p>
-    <h2>Responses</h2>
-    <table>
-  <tr>
-    <th>Name</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>last-updated</td>
-    <td>Date string (HH:MM:SS) of when the API was last updated.</td>
-  </tr>
-  <tr>
-    <td>storms</td>
-    <td>Returns a list of dictionaries for each active storm.</td>
-  </tr>
-  <tr>
-  <tr>
-    <td>id</td>
-    <td>(Nested in <i>storms</i> response) Depression of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax).</td>
-  </tr>
-</table>
-<p>Example url to get Tropical Storm Cristobal (http://127.0.0.1:5000/api/args?name=Cristobal)</p>
-     <footer> <small>&copy; Copyright 2020, Christian Diaz.  All Rights Reserved.</small> </footer>
-     <footer> <small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small> </footer>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>ATCF HTTP Server</title>
+        <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
+        }
+        </style>
+    </head>
+    <body>
+    <h1>Welcome to <a href="https://github.com/chrisd149/ATCF-HTTP-Server">ATCF HTTP Server</a> homepage!</h1>
+        <h2>How to use</h2>
+        <p>You should read the <a href="https://github.com/chrisd149/ATCF-HTTP-Server/blob/main/README.md">README.md</a> before starting out</p>
+        <h2>Params [GET]</h2>
+    <p><small>All params can be can be lowercase or uppercase.</small></p>
+        <li>/api/</li>
+        <p>Returns all storms' data in JSON format.</p>
+        <ul style="padding-left:80px">
+            <li>id</li>
+            <p>Returns storm by depression id (i.e. 12L.)</p>
+            <li>name</li>
+            <p>Returns storm by name (i.e. Iota.)</p>
+            <li>basin</li>
+            <p>Returns all storms in a basin (i.e. ATL.)</p>
+        </ul>
+    <p><small>Make sure to add <i>args?</i> to the end of <i>/api/</i> for id, name, or basin.</small></p>
+        <h2>Responses</h2>
+        <table>
+      <tr>
+        <th>Name</th>
+        <th>Details</th>
+      </tr>
+      <tr>
+        <td>last-updated</td>
+        <td>Date string (HH:MM:SS) of when the API was last updated.</td>
+      </tr>
+      <tr>
+        <td>storms</td>
+        <td>Returns a list of dictionaries for each active storm.</td>
+      </tr>
+      <tr>
+      <tr>
+        <td>id</td>
+        <td>(Nested in <i>storms</i> response) Depression of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax).</td>
+      </tr>
+    </table>
+    <p>Example url to get Tropical Storm Cristobal (http://127.0.0.1:5000/api/args?name=Cristobal)</p>
+         <footer> <small>&copy; Copyright 2020, Christian Diaz.  All Rights Reserved.</small> </footer>
+         <footer> <small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small> </footer>
+    </body>
 </html>
