@@ -4,7 +4,7 @@ pip install -r requirements.txt
 
 :top
 
-python -m ATCF-HTTP-Server
+python -m run
 
 pause
 goto top
