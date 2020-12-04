@@ -11,9 +11,12 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     DATA_DIR = 'data'
+    DATA_CSV = f'{DATA_DIR}/data.csv'
+    DATA_JSON = f'{DATA_DIR}/data.json'
 
 
 class ProductionConfig(Config):
+    # Don't actually use this for real production with Flask alone
     DEBUG = False
     FLASK_IP = environ.get('PROD_FLASK_IP')
     FLASK_PORT = environ.get('PROD_FLASK_PORT')

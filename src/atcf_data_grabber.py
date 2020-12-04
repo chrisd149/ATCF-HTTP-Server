@@ -14,13 +14,13 @@ import requests
 from src.data_processing import JsonMgr
 from config import Config
 
-DATA_DIR = Config.DATA_DIR
+DATA_CSV = Config.DATA_CSV
+DATA_JSON = Config.DATA_JSON
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
 
-# TODO: Logging
 # Headers don't work, and will give out an error if used with the atcf site.
 def get_atcf_data():
     # Pings atcf_link and writes information to temp.csv.  We then translate temp.csv to data.csv
@@ -40,7 +40,7 @@ def get_atcf_data():
             mkdir('data')
 
         # Creates data.csv where formatted data will be written to.
-        csv_file_1 = open(f'{DATA_DIR}/data.csv', 'w+')
+        csv_file_1 = open(DATA_CSV, 'w+')
 
         # Re-open temp.csv to read the raw data, then format it and write it to data.csv.
         with open(f'temp.csv', 'r') as e:
