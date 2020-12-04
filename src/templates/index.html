@@ -3,13 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>ATCF HTTP Server</title>
-        <style>
-        table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 10px;
-        }
-        </style>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
     </head>
     <body>
     <h1>Welcome to <a href="https://github.com/chrisd149/ATCF-HTTP-Server">ATCF HTTP Server</a> homepage!</h1>
@@ -48,8 +42,11 @@
         <td>(Nested in <i>storms</i> response) Depression of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax).</td>
       </tr>
     </table>
-    <p>Example url to get Tropical Storm Cristobal (http://127.0.0.1:5000/api/args?name=Cristobal)</p>
-         <footer> <small>&copy; Copyright 2020, Christian Diaz.  All Rights Reserved.</small> </footer>
-         <footer> <small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small> </footer>
+    <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/args?basin=atl">(http://127.0.0.1:5000/api/args?basin=atl)</a></p>
+    <p>A live api of all storms can be found at <a href="http://127.0.0.1:5000/api">http://127.0.0.1:5000/api</a>/</p>
+         <footer>
+             <small>&copy; Copyright 2020, Christian Diaz.  All Rights Reserved.</small>
+             <small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small>
+         </footer>
     </body>
 </html>
