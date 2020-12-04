@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Python modules
 from datetime import datetime, timedelta
 from time import sleep

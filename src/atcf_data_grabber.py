@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Description: Downloads and formats data from the ATCF sector file into a CSV file.
 """

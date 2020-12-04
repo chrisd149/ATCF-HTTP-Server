@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Python modules
 import json
 from datetime import datetime

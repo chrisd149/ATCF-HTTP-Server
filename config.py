@@ -1,6 +1,9 @@
-from os import environ, path
+#!/usr/bin/env python3
 
+# 3rd party modules
+from os import environ, path
 from dotenv import load_dotenv
+
 basedir = path.abspath(path.dirname(__file__))
 
 load_dotenv()  # Initializes dotenv

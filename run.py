@@ -1,8 +1,12 @@
+#!/usr/bin/env python3
 """
 Title: ATCF HTTP Server
 Description: A Flask-based HTTP server that returns data from the ATCF in JSON format.
 """
+# 3rd party modules
 from threading import Thread
+
+# Local modules
 from src import ATCFServer, DevelopmentConfig, app
 
 config = DevelopmentConfig
