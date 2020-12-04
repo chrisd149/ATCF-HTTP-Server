@@ -69,6 +69,7 @@ app = Flask(__name__)
 config = DevelopmentConfig
 
 
+# Home page sort of, just to give info to those who stumble upon it
 @app.route('/', methods=['GET'])
 def index():
     return render_template("index.html")
@@ -87,7 +88,7 @@ def get_all():
 
 
 # Returns specific storms based on depression id (i.e. 23L), name (i.e. POLO) or basin (i.e IO).
-# Must add "/args/?" + "name=NAME" or "id=ID" to end of server ip.
+# Must add "/args?" + "name=NAME" or "id=ID" to end of server ip.
 @app.route('/api/args', methods=['GET'])
 def args():
     # Possible args (id or name)

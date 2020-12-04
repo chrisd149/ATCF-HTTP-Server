@@ -8,7 +8,8 @@ import pytz
 
 from config import Config
 
-DATA_DIR = Config.DATA_DIR
+DATA_CSV = Config.DATA_CSV
+DATA_JSON = Config.DATA_JSON
 
 
 class JsonMgr:
@@ -24,7 +25,7 @@ class JsonMgr:
         date_now = date_now_raw.strftime('%H:%M:%S')
 
         # Reads CSV as a pandas Dataframe, which we use to get all row/column information
-        df = pd.read_csv(f'{DATA_DIR}/data.csv')  # Reads CSV
+        df = pd.read_csv(DATA_CSV)  # Reads CSV
         rows = len(df.index)  # Number of rows in CSV
         raw_json = dict()  # Empty dictionary for our JSON file
 
@@ -35,7 +36,7 @@ class JsonMgr:
             # If we are calling from the JSON after it was written (after last-updated is updated.)
             # We open data.json and retrieve the last-updated field there instead of outputting the
             # current time.
-            file = open(f'{DATA_DIR}/data.json', 'r')
+            file = open(DATA_JSON, 'r')
             values = json.load(file)
             raw_json['last-updated'] = values['last-updated']  # HH:MM:SS // Current time
         raw_json["storms"] = []
@@ -85,5 +86,5 @@ class JsonMgr:
 
 
 def create_json(data):
-    with open(f'{DATA_DIR}/data.json', 'w') as outfile:
+    with open(DATA_JSON, 'w') as outfile:
         outfile.write(data)  # Writes json_data to data.json

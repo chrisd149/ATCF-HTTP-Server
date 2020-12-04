@@ -11,6 +11,8 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     DATA_DIR = 'data'
+    DATA_CSV = f'{DATA_DIR}/data.csv'
+    DATA_JSON = f'{DATA_DIR}/data.json'
 
 
 class ProductionConfig(Config):

@@ -10,7 +10,7 @@ import inflect
 from src.data_processing import JsonMgr
 from config import Config
 
-DATA_DIR = Config.DATA_DIR
+DATA_JSON = Config.DATA_JSON
 p = inflect.engine()  # Initializes inflect engine
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
@@ -22,7 +22,7 @@ csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', '
 
 # Returns all storms globally
 def get_storms():
-    with open(f'{DATA_DIR}/data.json') as f:
+    with open(DATA_JSON) as f:
         data = json.load(f)
     return fix_all_time(data)
 
