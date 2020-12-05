@@ -7,26 +7,26 @@
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
     </head>
     <body>
-    <h1>Welcome to <a href="https://github.com/chrisd149/ATCF-HTTP-Server">ATCF HTTP Server</a> homepage!</h1>
+    <div class="main-box">
+    <h1>Welcome to the <a href="https://github.com/chrisd149/ATCF-HTTP-Server">ATCF HTTP Server</a> homepage!</h1>
         <h3>Current Active Storms</h3>
-    <p>Last updated at {{ last_updated | safe }} UTC</p>
+        <hr>
+        <p>Last updated at {{ last_updated | safe }} UTC</p>
         {{ data | safe }}
-        <h2>How to use</h2>
-        <p>You should read the <a href="https://github.com/chrisd149/ATCF-HTTP-Server/blob/main/README.md">README.md</a> before starting out</p>
         <h2>Params [GET]</h2>
+        <hr>
     <p><small>All params can be can be lowercase or uppercase.</small></p>
-        <li>/api/</li>
-        <p>Returns all storms' data in JSON format.</p>
-        <ul style="padding-left:80px">
-            <li>id</li>
-            <p>Returns storm by depression id (i.e. 12L.)</p>
-            <li>name</li>
-            <p>Returns storm by name (i.e. Iota.)</p>
-            <li>basin</li>
-            <p>Returns all storms in a basin (i.e. ATL.)</p>
-        </ul>
+    <h4>/api/</h4>
+    <p>Returns all storms' data in JSON format.</p>
+    <h4>id</h4>
+    <p>Returns storm by depression id (i.e. 12L.)</p>
+    <h4>name</h4>
+    <p>Returns storm by name (i.e. Iota.)</p>
+    <h4>basin</h4>
+    <p>Returns all storms in a basin (i.e. ATL.)</p>
     <p><small>Make sure to add <i>args?</i> to the end of <i>/api/</i> for id, name, or basin.</small></p>
         <h2>Responses</h2>
+        <hr>
         <table>
       <tr>
         <th>Name</th>
@@ -48,9 +48,8 @@
     </table>
     <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/args?basin=atl">(http://127.0.0.1:5000/api/args?basin=atl)</a></p>
     <p>A live api of all storms can be found at <a href="http://127.0.0.1:5000/api">http://127.0.0.1:5000/api</a>/</p>
-         <footer>
-             <small>&copy; Copyright 2020, Christian Diaz.  All Rights Reserved.</small>
-             <small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small>
-         </footer>
+    <footer><small>&copy; Copyright 2020, Christian Diaz.  All Rights Reserved.</small></footer>
+    <footer><small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small></footer>
+        </div>
     </body>
 </html>
