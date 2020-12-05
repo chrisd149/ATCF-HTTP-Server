@@ -8,6 +8,9 @@
     </head>
     <body>
     <h1>Welcome to <a href="https://github.com/chrisd149/ATCF-HTTP-Server">ATCF HTTP Server</a> homepage!</h1>
+        <h3>Current Active Storms</h3>
+    <p>Last updated at {{ last_updated | safe }} UTC</p>
+        {{ data | safe }}
         <h2>How to use</h2>
         <p>You should read the <a href="https://github.com/chrisd149/ATCF-HTTP-Server/blob/main/README.md">README.md</a> before starting out</p>
         <h2>Params [GET]</h2>

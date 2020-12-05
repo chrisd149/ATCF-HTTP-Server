@@ -3,14 +3,19 @@
 # Python modules
 from datetime import datetime, timedelta
 from time import sleep
+import json
 
 # 3rd party modules
 from flask import Flask, request, jsonify, render_template
+import pandas as pd
 import pytz
 
 # Local modules
 from src import atcf_data_grabber, get_data
-from config import DevelopmentConfig
+from config import DevelopmentConfig, Config
+
+DATA_CSV = Config.DATA_CSV
+DATA_JSON = Config.DATA_JSON
 
 
 class ATCFServer:
@@ -74,13 +79,11 @@ config = DevelopmentConfig
 # Home page sort of, just to give info to those who stumble upon it
 @app.route('/', methods=['GET'])
 def index():
-    return render_template("index.html")
-
-
-# Returns HTML table of data/data.csv
-@app.route('/data/', methods=['GET'])
-def csv_data():
-    return render_template("data.html")
+    # We open data.csv and parse it to the home page as a HTML table
+    df = pd.read_csv(DATA_CSV)
+    json_file = open(DATA_JSON, 'r')
+    values = json.load(json_file)
+    return render_template("index.html", data=df.to_html(index=False), last_updated=values['last-updated'])
 
 
 # Returns all data in JSON format
