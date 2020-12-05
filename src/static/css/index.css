@@ -1,10 +1,20 @@
 table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
-        padding: 10px;
-        font-family: Tahoma, Verdana, sans-serif;
+        text-align: center;
         }
 
-h1, h2, h3, p {
-    font-family: Tahoma, Verdana, sans-serif;
+.main-box {
+   font-family: Tahoma, Verdana, sans-serif;
+   margin: auto;
+   width: 50%;
+   padding: 2px;
+}
+
+table {
+   width: 100%;
+}
+
+footer {
+   text-align: center;
 }
