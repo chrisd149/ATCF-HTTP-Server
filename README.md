@@ -41,7 +41,24 @@ least strict limits.  Request limits are implemented with [flask limiter](https:
 ### Client
 Clients will need to send a HTTP GET request in order to get data.  
 
-To see examples as well with parameters, check out the [client README](src/README.md) or the [index file](127.0.0.1:5000) (only accessible if server is running on localhost)
+To see examples as well with parameters, check out the [client documentation](docs/CLIENT.md) or the [index file](https://127.0.0.1:5000) (only accessible if server is running on localhost)
 
 ![Index file of api.  Instructions are presented for clients, and can be found at ](images/home_page_example.png)
 <small>Example Index</small>
+
+## Contributing
+Contributors are welcomed! To contribute:
+* Follow (loosely) the guidelines set in [CONTRIBUTING.md](docs/CONTRIBUTING.md)
+
+The guidelines are not required to be followed strictly, however they are there to optimize your pull requests/issue reports to be
+constructive as possible.
+
+If you have any questions/inquires related to the project, don't hesitate to contact me [@chrisd149](#contact).
+
+## Contact
+I can be contacted via the following methods:
+* Email: `christianmigueldiaz@gmail.com`
+* Discord: `chrisd149#7640`
+
+I will try my best to respond to legitimate questions/inquires at soon as possible, however it may take me a few days at 
+most.
