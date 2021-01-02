@@ -1,4 +1,5 @@
 <h1>How to use (Client)</h1>
+    <img src="images/api_all_response_example.png" title="Example api response" align="center">
     <p><small>All params can be can be lowercase or uppercase.</small></p>
     <h4>/api/</h4>
     <p>Returns all storms' data in JSON format.</p>
