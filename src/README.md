@@ -10,7 +10,6 @@
     <p>Returns all storms in a basin (i.e. ATL.)</p>
     <p><small>Make sure to add <i>args?</i> to the end of <i>/api/</i> for id, name, or basin.</small></p>
         <h2>Responses</h2>
-        <hr>
         <table>
       <tr>
         <th>Name</th>
