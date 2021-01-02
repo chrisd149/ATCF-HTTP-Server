@@ -62,3 +62,11 @@ I can be contacted via the following methods:
 
 I will try my best to respond to legitimate questions/inquires at soon as possible, however it may take me a few days at 
 most.
+
+## Licensing
+This project uses the [MIT License](LICENSE.md).
+
+## Sources
+* ATCF - Automated cyclone software that is maintained by the US Naval Research Laboratory.  Every 6 hours (UTC-0), the
+[ATCF Sector file](https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file) is updated with all current cyclones' data, including name, depression ID, pressure, max 1-minute winds,
+and GPS coordinates.
