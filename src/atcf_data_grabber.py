@@ -18,7 +18,7 @@ from config import Config
 DATA_CSV = Config.DATA_CSV
 DATA_JSON = Config.DATA_JSON
 
-csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
+csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure']
 atcf_link = 'https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file'
 
 
@@ -47,14 +47,17 @@ def get_atcf_data():
         with open(f'temp.csv', 'r') as e:
             csv_reader = csv.reader(e, delimiter='\t')
 
-            # Writes headers
-            for item in csv_headers:
-                csv_file_1.write(f'{item},')
-            csv_file_1.write('\n')  # skip line to write data below columns
+            # Writes our headers
+            for i, item in enumerate(csv_headers):
+                if i:  # Adds comma if not first element
+                    csv_file_1.write(',')
+                csv_file_1.write(item)  # Writes each element
+            csv_file_1.write('\n')  # Skip line to write data below columns
 
             # Writes comma delimited data to data.csv
             for row in csv_reader:
                 csv_file_1.write(','.join(','.join(item.split()) for item in row) + '\n')
+
             e.close()
             csv_file_1.close()
             remove('temp.csv')  # removes temp file
