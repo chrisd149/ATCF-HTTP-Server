@@ -7,12 +7,14 @@ import json
 
 # 3rd party modules
 from flask import Flask, request, jsonify, render_template
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import pandas as pd
 import pytz
 
 # Local modules
 from src import atcf_data_grabber, get_data
-from config import DevelopmentConfig, Config
+from config import *
 
 DATA_CSV = Config.DATA_CSV
 DATA_JSON = Config.DATA_JSON
@@ -74,9 +76,20 @@ class ATCFServer:
 
 app = Flask(__name__)
 config = DevelopmentConfig
+if config == TestingConfig or DevelopmentConfig:
+    config.HOUR_LIMIT = config.MINUTE_LIMIT = config.SECOND_LIMIT = 10000
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=[f"{config.HOUR_LIMIT} per hour", f"{config.MINUTE_LIMIT} per minute", f"{config.SECOND_LIMIT} per second"]
+)
+
 
 
 # Home page sort of, just to give info to those who stumble upon it
+# Limited to 5 requests per minute per IP
+@limiter.limit("5 per minute")
 @app.route('/', methods=['GET'])
 def index():
     # We open data.csv and parse it to the home page as a HTML table

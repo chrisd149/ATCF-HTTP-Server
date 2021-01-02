@@ -23,6 +23,7 @@ class ProductionConfig(Config):
     DEBUG = False
     FLASK_IP = environ.get('PROD_FLASK_IP')
     FLASK_PORT = environ.get('PROD_FLASK_PORT')
+    HOUR_LIMIT, MINUTE_LIMIT, SECOND_LIMIT = 1000, 100, 10
 
 
 class StagingConfig(Config):
@@ -31,6 +32,7 @@ class StagingConfig(Config):
     RELOADER = False
     FLASK_IP = environ.get('PROD_FLASK_IP')
     FLASK_PORT = environ.get('PROD_FLASK_PORT')
+    HOUR_LIMIT, MINUTE_LIMIT, SECOND_LIMIT = 1000, 100, 10
 
 
 class DevelopmentConfig(Config):
@@ -44,4 +46,3 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     RELOADER = False
-
