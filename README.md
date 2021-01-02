@@ -1,7 +1,7 @@
 # ATCF HTTP Server
 <img src="images/epsilon.png" title="Hurricane Epsilon, at it's catergory 3 peak (Source: NOAA)" align="right" width=300>
 
-A development RESTful Flask server that returns JSON data of [ATCF storm data](https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file).  
+A development RESTful Flask server that returns JSON data of [ATCF storm data](#sources).  
 
 ## How it works
 The server has 2 main threads.  A Flask thread is initialized at startup as well as the ATCFServer thread.
@@ -69,6 +69,6 @@ most.
 This project uses the [MIT License](LICENSE.md).
 
 ## Sources
-* ATCF - Automated cyclone software that is maintained by the US Naval Research Laboratory.  Every 6 hours (UTC-0), the
-[ATCF Sector file](https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file) is updated with all current cyclones' data, including name, depression ID, pressure, max 1-minute winds,
-and GPS coordinates.
+* ATCF - Automated cyclone software that is maintained by the US Naval Research Laboratory.  Every 6 hours (UTC-0), the [ATCF Sector file](https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file) is updated with all current cyclones' data, including name, depression ID, pressure, max 1-minute winds, and GPS coordinates.
+
+* NOAA - Extraneous imagery used (i.e. Satelite image of Hurricane Epsilon at [the top of the README](#atcf-http-server))
