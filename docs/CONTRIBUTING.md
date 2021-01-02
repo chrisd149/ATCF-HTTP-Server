@@ -5,7 +5,6 @@
 Thank you for taking the time to contribute!
 
 * [Suggesting a feature](#suggesting-a-feature)
-* [Filing a bug report](#filing-a-bug-report)
 * [Submitting a pull request](#submitting-a-pull-request)
 
 ## Suggesting a feature
