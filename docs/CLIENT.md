@@ -10,7 +10,6 @@
     <p>Returns all storms in a basin (i.e. ATL.)</p>
     <p><small>Make sure to add <i>args?</i> to the end of <i>/api/</i> for id, name, or basin.</small></p>
         <h2>Responses</h2>
-        <hr>
         <table>
       <tr>
         <th>Name</th>
@@ -30,6 +29,5 @@
         <td>(Nested in <i>storms</i> response) Depression of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax).</td>
       </tr>
     </table>
-    <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/args?basin=atl">(http://127.0.0.1:5000/api/args?basin=atl)</a></p>
-    <p>A live api of all storms can be found at <a href="http://127.0.0.1:5000/api">http://127.0.0.1:5000/api</a>/</p>
-    <footer><small>Contact: <a href="mailto:christianmigueldiaz@gmail.com">christianmigueldiaz@gmail.com</a></small></footer>
+    <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/args?basin=atl" target="_blank">http://127.0.0.1:5000/api/args?basin=atl</a></p>
+    <p>A live api of all storms can be found at <a href="http://127.0.0.1:5000/api/" target="_blank">http://127.0.0.1:5000/api/</a></p>
