@@ -1,4 +1,6 @@
 # ATCF HTTP Server
+<img src="images/epsilon.png" title="Hurricane Epsilon, at it's catergory 3 peak (Source: NOAA)" align="right" width=300>
+
 A development RESTful Flask server that returns JSON data of [ATCF storm data](https://www.nrlmry.navy.mil/tcdat/sectors/atcf_sector_file).  
 
 ## How it works
