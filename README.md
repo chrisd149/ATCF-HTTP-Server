@@ -43,7 +43,7 @@ least strict limits.  Request limits are implemented with [flask limiter](https:
 ### Client
 Clients will need to send a HTTP GET request in order to get data.  
 
-To see examples as well with parameters, check out the [client documentation](docs/CLIENT.md) or the [index file](https://127.0.0.1:5000) (only accessible if server is running on localhost)
+To see examples as well with parameters, check out the [client documentation](docs/CLIENT.md) or the [index file](http://127.0.0.1:5000) (only accessible if server is running on localhost)
 
 ![Index file of api.  Instructions are presented for clients, and can be found at ](images/home_page_example.png)
 <small>Example Index</small>
