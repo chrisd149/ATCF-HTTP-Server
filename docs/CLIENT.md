@@ -42,6 +42,7 @@
       </tr>
     </table>
     <p><sup>1. Vmax is the maximum 1-minute sustained winds in knots.</sup><p>
-    <img src="images/client_json_response_all.png" title="Default API response" align="center" height=100>
+    <img src="/images/client_json_reposnse_all.png" title="Default API response">
+    <small>Default API response</small>
     <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/?basin=atl" target="_blank">http://127.0.0.1:5000/api/?basin=atl</a></p>
     <p>A live api of all storms can be found at <a href="http://127.0.0.1:5000/api/" target="_blank">http://127.0.0.1:5000/api/</a></p>
