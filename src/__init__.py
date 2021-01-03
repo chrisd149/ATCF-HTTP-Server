@@ -86,7 +86,6 @@ limiter = Limiter(
 )
 
 
-
 # Home page sort of, just to give info to those who stumble upon it
 # Limited to 5 requests per minute per IP
 @limiter.limit("5 per minute")
@@ -99,26 +98,20 @@ def index():
     return render_template("index.html", data=df.to_html(index=False), last_updated=values['last-updated'])
 
 
-# Returns all data in JSON format
 @app.route('/api/', methods=['GET'])
-def get_all():
-    return jsonify(get_data.get_storms())
+def get_api():
+    # Returns specific storms based on depression id (i.e. 23L), name (i.e. POLO) or basin (i.e IO).
+    # Must add "?" + "name=NAME" or "id=ID" to end of server ip.
 
-
-# Returns specific storms based on depression id (i.e. 23L), name (i.e. POLO) or basin (i.e IO).
-# Must add "/args?" + "name=NAME" or "id=ID" to end of server ip.
-@app.route('/api/args', methods=['GET'])
-def args():
     # Possible args (id or name)
     id = request.args.get('id')  # depression id
     name = request.args.get('name')  # storm name
-    basin = request.args.get('basin') # basin
-
-    if not id or not name:
-        pass  # if no id or name or basin is passed we skip it
+    basin = request.args.get('basin')  # basin
     if id:
         return jsonify(get_data.get_storm_id(id))
     if name:
         return jsonify(get_data.get_storm_name(name))
     if basin:
         return jsonify(get_data.get_storms_in_basin(basin))
+
+    return jsonify(get_data.get_storms())
