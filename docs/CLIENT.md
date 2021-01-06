@@ -21,6 +21,7 @@
         <td>Returns storms by their respective oceanic basin.</td>
         <td>ATL</td>
       </tr>
+    </table>
         <h2>Responses</h2>
         <p>All responeses will be in JSON format.</p>
         <table>
