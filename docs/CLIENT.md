@@ -1,5 +1,6 @@
 <h1>How to use (Client)</h1>
-    <p><small>All params can be can be lowercase or uppercase.</small></p>
+    <p>Clients can make a HTTP GET request to the server on 127.0.0.1:5000/api/ (replace the IP and port with your own devlopment/production variables.)</p>
+    <small>Params aren't required for a request.</small>
     <table>
       <tr>
         <th>Name</th>
@@ -42,7 +43,7 @@
         <td>(Nested in <i>storms</i> response) Depression of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax<sup>1</sup></td>
       </tr>
     </table>
-    <p><sup>1. Vmax is the maximum 1-minute sustained winds in knots.</sup><p>
+    <p><sup>1. Vmax is the maximum 1-minute sustained winds in knots.</sup></p>
     <img src="/images/client_json_reposnse_all.png" title="Default API response">
     <small>Default API response</small>
     <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/?basin=atl" target="_blank">http://127.0.0.1:5000/api/?basin=atl</a></p>
