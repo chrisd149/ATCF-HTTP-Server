@@ -34,14 +34,14 @@ def check_for_storms(data: dict):
 def get_storms():
     with open(DATA_JSON) as f:
         data = json.load(f)
-    check_for_storms(data)
+    return check_for_storms(data)
 
 
 # Returns storm(s) by depression id
 def get_storm_id(input_id: str):
     input_id = input_id.upper()
     data = json.loads(JsonMgr.csv_to_json(input_id, 'id'))
-    check_for_storms(data)
+    return check_for_storms(data)
 
 
 # Returns storm(s) by name
@@ -58,14 +58,14 @@ def get_storm_name(input_name: str or int):
         input_name = input_name.upper()
 
     data = json.loads(JsonMgr.csv_to_json(input_name, 'name'))
-    check_for_storms(data)
+    return check_for_storms(data)
 
 
 # Returns all storms in a basin
 def get_storms_in_basin(basin):
     input_basin = basin.upper()
     data = json.loads(JsonMgr.csv_to_json(input_basin, 'basin'))
-    check_for_storms(data)
+    return check_for_storms(data)
 
 
 # Fixes all time values in a list or dictionary object
