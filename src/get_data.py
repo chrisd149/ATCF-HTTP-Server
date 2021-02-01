@@ -16,23 +16,32 @@ p = inflect.engine()  # Initializes inflect engine
 
 csv_headers = ['id', 'name', 'date', 'time', 'latitude', 'longitude', 'basin', 'vmax', 'pressure', 'last-updated']
 
-# For all functions, we check if the requested Dataframe (df) is empty.  If so, either
-# the client entered the wrong information, or no active storms fit the requested
-# criteria.
+
+def check_for_storms(data: dict):
+    # Checks if the requested 'storms' JSON field is empty.  If empty, the client entered
+    # the wrong information, or no active storms fit the requested criteria.  NULL is passed
+    # if the 'storms' field is empty.
+    if len(data['storms']) == 0:
+        print('oh god')
+        data['storms'] = 'NULL'
+        return data
+    else:
+        # If storms are present, correct the time values
+        return fix_all_time(data)
 
 
 # Returns all storms globally
 def get_storms():
     with open(DATA_JSON) as f:
         data = json.load(f)
-    return fix_all_time(data)
+    check_for_storms(data)
 
 
 # Returns storm(s) by depression id
 def get_storm_id(input_id: str):
     input_id = input_id.upper()
     data = json.loads(JsonMgr.csv_to_json(input_id, 'id'))
-    return fix_all_time(data)
+    check_for_storms(data)
 
 
 # Returns storm(s) by name
@@ -49,14 +58,14 @@ def get_storm_name(input_name: str or int):
         input_name = input_name.upper()
 
     data = json.loads(JsonMgr.csv_to_json(input_name, 'name'))
-    return fix_all_time(data)
+    check_for_storms(data)
 
 
 # Returns all storms in a basin
 def get_storms_in_basin(basin):
     input_basin = basin.upper()
     data = json.loads(JsonMgr.csv_to_json(input_basin, 'basin'))
-    return fix_all_time(data)
+    check_for_storms(data)
 
 
 # Fixes all time values in a list or dictionary object
