@@ -22,7 +22,6 @@ def check_for_storms(data: dict):
     # the wrong information, or no active storms fit the requested criteria.  NULL is passed
     # if the 'storms' field is empty.
     if len(data['storms']) == 0:
-        print('oh god')
         data['storms'] = 'NULL'
         return data
     else:
