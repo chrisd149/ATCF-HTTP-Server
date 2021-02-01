@@ -40,7 +40,7 @@ class JsonMgr:
             file = open(DATA_JSON, 'r')
             values = json.load(file)
             raw_json['last-updated'] = values['last-updated']  # HH:MM:SS // Current time
-        raw_json["storms"] = []
+        raw_json["storms"] = {}
 
         # Writes each storm data in storms list until no more rows are left to parse from the CSV.
         while rows != 0:
@@ -65,8 +65,7 @@ class JsonMgr:
             if cell_data == param:
                 # JSON data
                 storm_data = \
-                    {
-                        f'{row_df["id"]}': {
+                        {
                             "name": f'{row_df["name"]}',
                             "date": f'{row_df["date"]}',
                             "time": f'{row_df["time"]}',
@@ -76,8 +75,7 @@ class JsonMgr:
                             "vmax": f'{row_df["vmax"]}',
                             "pressure": f'{row_df["pressure"]}'
                         }
-                    }
-                raw_json["storms"].append(storm_data)  # Appends storm_data dict to storms list
+                raw_json["storms"][f'{row_df["id"]}'] = storm_data  # Appends storm_data dict to storms list
         # Converts raw_json dictionary to JSON
         json_data = json.dumps(raw_json, indent=4, sort_keys=True)
         if not input_arg:

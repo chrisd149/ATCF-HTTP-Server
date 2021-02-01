@@ -36,15 +36,15 @@
       </tr>
       <tr>
         <td>storms</td>
-        <td>Returns a list of dictionaries for each active storm.</td>
+        <td>Returns a dictonary of dictionaries for each active storm.</td>
       </tr>
       <tr>
         <td>id</td>
-        <td>(Nested in <i>storms</i> response) Depression of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax<sup>1</sup></td>
+        <td>(Nested in <i>storms</i> response) Key is the depression ID of an active storm. Contains a dictionary of the values (basin, date, latitude, longitude, name, pressure, time, vmax<sup>1</sup>)</td>
       </tr>
     </table>
     <p><sup>1. Vmax is the maximum 1-minute sustained winds in knots.</sup></p>
     <img src="/images/client_json_reposnse_all.png" title="Default API response">
-    <small>Default API response</small>
+    <small>Example API response</small>
     <p>Example url to get all storms in the Atlantic basin: <a href="http://127.0.0.1:5000/api/?basin=atl" target="_blank">http://127.0.0.1:5000/api/?basin=atl</a></p>
     <p>A live api of all storms can be found at <a href="http://127.0.0.1:5000/api/" target="_blank">http://127.0.0.1:5000/api/</a></p>
