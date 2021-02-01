@@ -61,10 +61,14 @@ def get_storms_in_basin(basin):
 
 # Fixes all time values in a list or dictionary object
 def fix_all_time(file: dict or list):
-    for storm in file['storms']:
-        # Makes every time value 4 digits (i.e. 0 -> 0000, 600 -> 0600)
-        storm[next(iter(storm))]['time'] = storm[next(iter(storm))]['time'].zfill(4)
-    return file
+    for k in file.keys():
+        if k == 'storms':
+            for storm in file[k].values():
+                for data in storm.values():
+                    if data == 'time':
+                        # Makes every time value 4 digits (i.e. 0 -> 0000, 600 -> 0600)
+                        data['time'] = data['time'].zfill(4)
+            return file
 
 
 
