@@ -3,6 +3,7 @@
 
 A development RESTful Flask server that returns JSON data of [ATCF storm data](#sources).  
 
+**Note**: The ATCF source occasaionally doesn't update on time, which can cause outdated information to be returned.
 ## How it works
 The server has 2 main threads.  A Flask thread is initialized at startup as well as the ATCFServer thread.
 
